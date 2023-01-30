@@ -26,6 +26,7 @@ import androidx.navigation.NavHostController
 import com.example.newsappfinalassignment.R
 import com.example.newsappfinalassignment.model.Data
 import com.example.newsappfinalassignment.ui.MainViewModel
+import com.example.newsappfinalassignment.ui.view.SignOutAlert
 import com.example.newsappfinalassignment.util.Resource
 import com.example.newsappfinalassignment.util.Screen
 import com.example.newsappfinalassignment.util.Util.formatDate
@@ -42,13 +43,24 @@ fun NewsListScreen(
     val context = LocalContext.current
     val newsList = viewModel.newsList.observeAsState()
 
+    var signOutAlert by remember {
+        mutableStateOf(false)
+    }
+
+    SignOutAlert(shouldShow = signOutAlert, onDismiss = { signOutAlert = false }) {
+        signOut()
+    }
+
     Scaffold(
         topBar = {
             TopAppBar(
                 backgroundColor = MaterialTheme.colors.primary,
                 title = { Text(text = stringResource(id = R.string.app_name)) },
                 actions = {
-                    Button(onClick = { signOut() }) {
+                    Button(
+                        onClick = { signOutAlert = true },
+                        modifier = Modifier.padding(horizontal = 4.dp)
+                    ) {
                         Text(text = "Sign out")
                     }
                 }

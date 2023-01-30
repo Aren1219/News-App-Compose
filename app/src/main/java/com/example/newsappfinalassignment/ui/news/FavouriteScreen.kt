@@ -9,11 +9,11 @@ import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
-import com.example.newsappfinalassignment.R
 import com.example.newsappfinalassignment.model.Data
 import com.example.newsappfinalassignment.ui.MainViewModel
+import com.example.newsappfinalassignment.ui.view.SignOutAlert
 import com.example.newsappfinalassignment.util.Screen
 
 @Composable
@@ -23,13 +23,18 @@ fun FavouriteScreen(
     listState: LazyListState,
     signOut: () -> Unit
 ) {
-    var alert by remember { mutableStateOf(false) }
+    var deleteAlert by remember { mutableStateOf(false) }
     var deleteData: Data? by remember { mutableStateOf(null) }
 
-    if (alert) {
-        AlertDialog(
+    var signOutAlert by remember { mutableStateOf(false) }
 
-            onDismissRequest = { alert = false },
+    SignOutAlert(shouldShow = signOutAlert, onDismiss = { signOutAlert = false }) {
+        signOut()
+    }
+
+    if (deleteAlert) {
+        AlertDialog(
+            onDismissRequest = { deleteAlert = false },
             title = { Text(text = "Are you sure?") },
             text = { Text(text = "You may not find the article anymore") },
             confirmButton = {
@@ -37,14 +42,14 @@ fun FavouriteScreen(
                     if (deleteData != null) {
                         viewModel.deleteNews(deleteData!!)
                         deleteData = null
-                        alert = false
+                        deleteAlert = false
                     }
                 }) {
                     Text(text = "Delete")
                 }
             },
             dismissButton = {
-                Button(onClick = { alert = false }) {
+                Button(onClick = { deleteAlert = false }) {
                     Text(text = "Cancel")
                 }
             }
@@ -56,7 +61,10 @@ fun FavouriteScreen(
             backgroundColor = MaterialTheme.colors.primary,
             title = { Text(text = "Favourite") },
             actions = {
-                Button(onClick = { signOut() }) {
+                Button(
+                    onClick = { signOutAlert = true },
+                    modifier = Modifier.padding(horizontal = 4.dp)
+                ) {
                     Text(text = "Sign out")
                 }
             }
@@ -86,7 +94,7 @@ fun FavouriteScreen(
                 },
                 onSave = { data ->
                     deleteData = data
-                    alert = true
+                    deleteAlert = true
                 },
                 listState = listState,
                 icon = Icons.Default.Delete,

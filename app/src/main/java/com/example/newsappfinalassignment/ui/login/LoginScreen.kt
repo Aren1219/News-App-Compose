@@ -5,11 +5,12 @@ import android.widget.Toast
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Button
+import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
-import androidx.compose.material.TextField
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -51,7 +52,8 @@ fun LoginScreen(auth: FirebaseAuth, signedIn: () -> Unit, googleSignIn: () -> Un
                 .fillMaxWidth()
                 .padding(16.dp)
         ) {
-            TextField(
+            OutlinedTextField(
+                shape = CircleShape,
                 value = email,
                 onValueChange = { text -> email = text },
                 label = { Text(text = "email") },
@@ -62,7 +64,8 @@ fun LoginScreen(auth: FirebaseAuth, signedIn: () -> Unit, googleSignIn: () -> Un
                 ),
                 keyboardActions = KeyboardActions(onNext = { focusManager.moveFocus(FocusDirection.Down) })
             )
-            TextField(
+            OutlinedTextField(
+                shape = CircleShape,
                 value = password,
                 onValueChange = { text -> password = text },
                 label = { Text(text = "password") },
@@ -74,15 +77,13 @@ fun LoginScreen(auth: FirebaseAuth, signedIn: () -> Unit, googleSignIn: () -> Un
                 keyboardActions = KeyboardActions(onDone = { focusManager.clearFocus() }),
                 visualTransformation = PasswordVisualTransformation()
             )
-            Column(horizontalAlignment = Alignment.End) {
-                SignInButton(email = email, password = password, auth = auth) {
-                    signedIn()
-                    focusManager.clearFocus()
-                }
-                SignUpButton(email = email, password = password, auth = auth) {
-                    signedIn()
-                    focusManager.clearFocus()
-                }
+            SignInButton(email = email, password = password, auth = auth) {
+                signedIn()
+                focusManager.clearFocus()
+            }
+            SignUpButton(email = email, password = password, auth = auth) {
+                signedIn()
+                focusManager.clearFocus()
             }
         }
 //        Button(onClick = { googleSignIn() }) {
@@ -95,6 +96,8 @@ fun LoginScreen(auth: FirebaseAuth, signedIn: () -> Unit, googleSignIn: () -> Un
 fun SignInButton(email: String, password: String, auth: FirebaseAuth, signedIn: () -> Unit) {
     val context = LocalContext.current
     Button(
+        shape = CircleShape,
+        modifier = Modifier.fillMaxWidth(),
         onClick = {
             if (email.isNotEmpty() && password.isNotEmpty())
                 auth.signInWithEmailAndPassword(email, password)
@@ -127,6 +130,8 @@ fun SignInButton(email: String, password: String, auth: FirebaseAuth, signedIn: 
 fun SignUpButton(email: String, password: String, auth: FirebaseAuth, signedIn: () -> Unit) {
     val context = LocalContext.current
     Button(
+        shape = CircleShape,
+        modifier = Modifier.fillMaxWidth(),
         onClick = {
             if (email.isEmpty() || password.isEmpty())
                 Toast.makeText(
