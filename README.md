@@ -1,5 +1,7 @@
 #News App
 
+# News-App-Compose
+
 ## description:
 
 The app utilises The News API(https://www.thenewsapi.com/) to fetch news from all over the internet. You can also save any news in the app.
@@ -39,4 +41,3 @@ The app utilises The News API(https://www.thenewsapi.com/) to fetch news from al
 
 ## 👨 Developed By
 *Aren Wang*
-# News-App-Compose
