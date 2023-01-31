@@ -1,5 +1,7 @@
 #News App
 
+# News-App-Compose
+
 ## description:
 
 The app utilises The News API(https://www.thenewsapi.com/) to fetch news from all over the internet. You can also save any news in the app.
@@ -14,7 +16,6 @@ The app utilises The News API(https://www.thenewsapi.com/) to fetch news from al
 ## Architecture
 * Built with Modern Android Development practices.
 * Utilized Repository pattern for data.
-* Includes valid Unit tests for ViewModel.
 
 ## Built With 🛠
 - Kotlin - First class and official programming language for Android development.
@@ -40,4 +41,3 @@ The app utilises The News API(https://www.thenewsapi.com/) to fetch news from al
 
 ## 👨 Developed By
 *Aren Wang*
-# News-App-Compose
