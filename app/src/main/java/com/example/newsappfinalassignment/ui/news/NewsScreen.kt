@@ -226,6 +226,6 @@ fun NewsItemUi(
 
 @Preview
 @Composable
-fun Preview() {
+private fun Preview() {
     NewsListUi(previewNewsDataList(), {}, {}, {}, rememberLazyListState(), icon = Icons.Default.Add)
 }

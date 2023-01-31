@@ -93,7 +93,12 @@ fun LoginScreen(auth: FirebaseAuth, signedIn: () -> Unit, googleSignIn: () -> Un
 }
 
 @Composable
-fun SignInButton(email: String, password: String, auth: FirebaseAuth, signedIn: () -> Unit) {
+private fun SignInButton(
+    email: String,
+    password: String,
+    auth: FirebaseAuth,
+    signedIn: () -> Unit
+) {
     val context = LocalContext.current
     Button(
         shape = CircleShape,
@@ -127,7 +132,12 @@ fun SignInButton(email: String, password: String, auth: FirebaseAuth, signedIn: 
 }
 
 @Composable
-fun SignUpButton(email: String, password: String, auth: FirebaseAuth, signedIn: () -> Unit) {
+private fun SignUpButton(
+    email: String,
+    password: String,
+    auth: FirebaseAuth,
+    signedIn: () -> Unit
+) {
     val context = LocalContext.current
     Button(
         shape = CircleShape,
@@ -175,7 +185,7 @@ fun SignUpButton(email: String, password: String, auth: FirebaseAuth, signedIn: 
 
 @Preview(showBackground = true)
 @Composable
-fun LoginPreview() {
+private fun LoginPreview() {
     NewsAppfinalAssignmentTheme {
         LoginScreen(Firebase.auth, {}, {})
     }

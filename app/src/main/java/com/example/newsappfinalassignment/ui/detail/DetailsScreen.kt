@@ -57,7 +57,7 @@ fun DetailsScreen(
 }
 
 @Composable
-fun Top(title: String, back: () -> Unit) {
+private fun Top(title: String, back: () -> Unit) {
     TopAppBar(backgroundColor = MaterialTheme.colors.primary) {
         IconButton(onClick = { back() }) {
             Icon(imageVector = Icons.Default.ArrowBack, contentDescription = "back")
@@ -67,7 +67,7 @@ fun Top(title: String, back: () -> Unit) {
 }
 
 @Composable
-fun MoreDerails(data: Data) {
+private fun MoreDerails(data: Data) {
     val padding = 12.dp
     Surface(modifier = Modifier.fillMaxSize()) {
         Column(
@@ -124,7 +124,7 @@ fun MoreDerails(data: Data) {
 
 @Composable
 @Preview(showBackground = true)
-fun PreviewTop() {
+private fun PreviewTop() {
     NewsAppfinalAssignmentTheme {
         Top("Some Random News") {}
     }
@@ -132,7 +132,7 @@ fun PreviewTop() {
 
 @Composable
 @Preview(showBackground = true)
-fun PreviewDetails() {
+private fun PreviewDetails() {
     NewsAppfinalAssignmentTheme {
         Column {
             MoreDerails(data = Util.previewNewsData())
